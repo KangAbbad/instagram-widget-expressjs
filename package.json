@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "commit": "git-cz"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +20,14 @@
     "graphql": "^15.7.2",
     "nodemon": "^2.0.14",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
