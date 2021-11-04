@@ -64,6 +64,8 @@ To use the Instagram basic display API in development, we will have to add a tes
 
 ## Getting the short-lived access token
 
+Short-lived access tokens are valid for 1 hour.
+
 1. From your browser, visit: `http://localhost:4000/graphql`.
 2. Hit on *Query your server* and go to [apollographql sandbox](https://studio.apollographql.com/sandbox/explorer?endpoint=http://localhost:4000/graphql).
 3. On the code editor, write the following query:
@@ -95,6 +97,8 @@ To use the Instagram basic display API in development, we will have to add a tes
 7. Copy the **access_token** value from the response to your `.env` file on **SHORT_LIVED_AT** variable.
 
 ## Getting the long-lived access token
+
+Long-lived access tokens are valid for 60 days.
 
 1. From your browser, visit: `http://localhost:4000/graphql`.
 2. Hit on *Query your server* and go to [apollographql sandbox](https://studio.apollographql.com/sandbox/explorer?endpoint=http://localhost:4000/graphql).
