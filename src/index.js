@@ -11,15 +11,7 @@ const PORT = process.env.PORT || 4000;
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-app.get('/get-auth-code', (req, res, next) => {
-  return res.send(`<a href='https://api.instagram.com/oauth/authorize?client_id=${process.env.INSTAGRAM_APP_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=user_media,user_profile&response_type=code'> Connect to Instagram </a>`);
-});
-
-app.get('/me', async (req, res) => {
+const onGetMe = async (req, res) => {
   try {
     const response = await get('https://graph.instagram.com/me', {
       params: {
@@ -34,9 +26,9 @@ app.get('/me', async (req, res) => {
   } catch (error) {
     res.send(error);
   }
-});
+};
 
-app.get('/me/posts', async (req, res) => {
+const onGetMyPosts = async (req, res) => {
   try {
     const response = await get('https://graph.instagram.com/me/media', {
       params: {
@@ -51,7 +43,19 @@ app.get('/me/posts', async (req, res) => {
   } catch (error) {
     res.send(error);
   }
+};
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.get('/get-auth-code', (req, res, next) => {
+  return res.send(`<a href='https://api.instagram.com/oauth/authorize?client_id=${process.env.INSTAGRAM_APP_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=user_media,user_profile&response_type=code'> Connect to Instagram </a>`);
 });
+
+app.get('/me', onGetMe);
+
+app.get('/me/posts', onGetMyPosts);
 
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
 
