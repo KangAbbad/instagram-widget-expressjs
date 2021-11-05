@@ -2,13 +2,13 @@ const { UserInputError } = require('apollo-server-express');
 const { get } = require('axios').default;
 const { post } = require('request');
 const { promisify } = require('util');
-require('dotenv').config();
 
+require('dotenv').config();
 const postAsync = promisify(post);
 
 async function getShortLivedAccessToken() {
   const { body, statusCode } = await postAsync({
-    url: `https://api.instagram.com/oauth/access_token`,
+    url: 'https://api.instagram.com/oauth/access_token',
     formData: {
       client_id: process.env.INSTAGRAM_APP_ID,
       client_secret: process.env.INSTAGRAM_APP_SECRET,

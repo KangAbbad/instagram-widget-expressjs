@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 
-const AccessTokenResponse = gql`
-  type AccessTokenResponse {
+const ShortLivedAccessToken = gql`
+  type ShortLivedAccessToken {
     access_token: String!
     user_id: Float!
   }
@@ -40,7 +40,7 @@ const MediaData = gql`
 
 const Query = gql`
   type Query {
-    getShortLivedAccessToken: AccessTokenResponse
+    getShortLivedAccessToken: ShortLivedAccessToken
     getLongLivedAccessToken: LongLivedAccessToken
     getProfileData: ProfileData
     getUserMediaData: [MediaData]
@@ -48,7 +48,7 @@ const Query = gql`
 `;
 
 module.exports = [
-  AccessTokenResponse,
+  ShortLivedAccessToken,
   LongLivedAccessToken,
   ProfileData,
   MediaData,
