@@ -44,7 +44,7 @@ To use the Instagram basic display API in development, we will have to add a tes
 
     Edit your .env file by adding the following:
 
-    ```java
+    ```go
       INSTAGRAM_APP_ID=your_instagram_app_id
       INSTAGRAM_APP_SECRET=your_instagram_app_secret
       REDIRECT_URI=https://httpstat.us/200
@@ -58,7 +58,9 @@ To use the Instagram basic display API in development, we will have to add a tes
 1. From your web browser, open `http:localhost:4000/get-auth-code`. In there, click the link Connect to Instagram to connect to your Instagram account.
 2. In the resulting pop-up, click *Allow*, after which you will be redirected to a different page. On this new page, in the URL section, we have a code parameter which is as below for example:
 
-    `https://httpstat.us/200?code=AQAxeSr9DVqvZH_HLztDHS-fpY6L8kOTOBkZrDIYAT6l64wGwbuD8XA9DJo_oFaWZUHb1iqANhBpngqzV3nigbikLC3BCxF7h-wGjhLDT92m7oGlnc5WM...#_`
+    ```md
+    https://httpstat.us/200?code=AQAxeSr9DVqvZH_HLztDHS-fpY6L8kOTOBkZrDIYAT6l64wGwbuD8XA9DJo_oFaWZUHb1iqANhBpngqzV3nigbikLC3BCxF7h-wGjhLDT92m7oGlnc5WM...#_
+    ```
 
     Copy the entire value of code parameter up to where we have #. Don’t include the #. Paste the code to your .env file on **AUTHORIZATION_CODE** variable.
 
@@ -70,7 +72,7 @@ Short-lived access tokens are valid for 1 hour.
 2. Hit on *Query your server* and go to [apollographql sandbox](https://studio.apollographql.com/sandbox/explorer?endpoint=http://localhost:4000/graphql).
 3. On the code editor, write the following query:
 
-    ```java
+    ```go
     query GetShortToken{
       getShortLivedAccessToken{
         access_token
@@ -104,7 +106,7 @@ Long-lived access tokens are valid for 60 days.
 2. Hit on *Query your server* and go to [apollographql sandbox](https://studio.apollographql.com/sandbox/explorer?endpoint=http://localhost:4000/graphql).
 3. On the code editor, write the following query:
 
-    ```java
+    ```go
     query GetLongLivedToken {
       getLongLivedAccessToken{
         access_token
