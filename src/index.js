@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // for parsing multipart/form-data
 app.use(upload.array()); 
-app.use(express.static('public'));
+app.use(express.static('../public'));
 
 const onGetAuthCode = (req, res, next) => {
   return res.send(`<a href='https://api.instagram.com/oauth/authorize?client_id=${process.env.INSTAGRAM_APP_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=user_media,user_profile&response_type=code' target="_blank"> Connect to Instagram </a>`);
@@ -191,6 +191,10 @@ const onGetIgPosts = async (req, res) => {
     res.json(resError);
   }
 };
+
+app.get("/", (req, res) => {
+  res.send("<h1>Hello World!</h1>")
+});
 
 app.get('/get-auth-code', onGetAuthCode);
 app.post('/get-short-lived-access-token', onGetShortLivedAccessToken);
