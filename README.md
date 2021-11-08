@@ -142,8 +142,8 @@ Long-lived access tokens are valid for 60 days.
 http://localhost:4000/me
 ```
 
-### **/me/posts**
+### **/ig-posts**
 
 ```html
-http://localhost:4000/me/posts
+http://localhost:4000/ig-posts
 ```

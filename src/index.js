@@ -111,33 +111,84 @@ const onGetMe = async (req, res) => {
   try {
     const response = await get('https://graph.instagram.com/me', {
       params: {
-        fields: 'id, username, media_count, account_type',
-        access_token: process.env.LONG_LIVED_AT,
+        fields: req.query.fields || 'id, username, media_count, account_type',
+        access_token: req.query.access_token,
       },
       headers: {
         host: 'graph.instagram.com',
       },
     });
-    res.send(response.data);
+    res.json({
+      status: 200,
+      data: response.data,
+      error_message: '',
+    });
   } catch (error) {
-    res.send(error);
+    const resError = {
+      status: 0,
+      data: {},
+      message: '',
+      request: {},
+      headers: {},
+      config: {},
+    };
+
+    if (error.response) {
+      resError.status = error.response.status;
+      resError.data = error.response.data;
+      resError.headers = error.response.headers;
+    } else if (error.request) {
+      resError.headers = error.request;
+    } else {
+      resError.message = error.message;
+    }
+
+    resError.config = error.config;
+
+    res.json(resError);
   }
 };
 
-const onGetMyPosts = async (req, res) => {
+const onGetIgPosts = async (req, res) => {
   try {
-    const response = await get('https://graph.instagram.com/me/media', {
+    const response = await get(`https://graph.instagram.com/${req.query.user_id || 'me'}/media`, {
       params: {
-        fields: 'id, caption, media_url, media_type, permalink, thumbnail_url, timestamp, username',
-        access_token: process.env.LONG_LIVED_AT,
+        fields: req.query.fields || 'id, caption, media_url, media_type, permalink, thumbnail_url, timestamp, username',
+        access_token: req.query.access_token,
+        limit: req.query.limit || 10,
       },
       headers: {
         host: 'graph.instagram.com',
       },
     });
-    res.send(response.data);
+    res.json({
+      status: 200,
+      data: response.data.data,
+      error_message: '',
+    });
   } catch (error) {
-    res.send(error);
+    const resError = {
+      status: 0,
+      data: {},
+      message: '',
+      request: {},
+      headers: {},
+      config: {},
+    };
+
+    if (error.response) {
+      resError.status = error.response.status;
+      resError.data = error.response.data;
+      resError.headers = error.response.headers;
+    } else if (error.request) {
+      resError.headers = error.request;
+    } else {
+      resError.message = error.message;
+    }
+
+    resError.config = error.config;
+
+    res.json(resError);
   }
 };
 
@@ -145,7 +196,7 @@ app.get('/get-auth-code', onGetAuthCode);
 app.post('/get-short-lived-access-token', onGetShortLivedAccessToken);
 app.get('/get-long-lived-access-token', onGetLongLivedAccessToken);
 app.get('/me', onGetMe);
-app.get('/me/posts', onGetMyPosts);
+app.get('/ig-posts', onGetIgPosts);
 
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
 
