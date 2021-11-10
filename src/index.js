@@ -153,7 +153,7 @@ const onGetIgPosts = async (req, res) => {
   try {
     const response = await get(`https://graph.instagram.com/${req.query.user_id || 'me'}/media`, {
       params: {
-        fields: req.query.fields || 'id, caption, media_url, media_type, permalink, thumbnail_url, timestamp, username',
+        fields: req.query.fields || 'id, caption, media_url, media_type, like_count, comments_count, permalink, thumbnail_url, timestamp, username',
         access_token: req.query.access_token,
         limit: req.query.limit || 9,
       },
