@@ -155,7 +155,7 @@ const onGetIgPosts = async (req, res) => {
       params: {
         fields: req.query.fields || 'id, caption, media_url, media_type, permalink, thumbnail_url, timestamp, username',
         access_token: req.query.access_token,
-        limit: req.query.limit || 10,
+        limit: req.query.limit || 9,
       },
       headers: {
         host: 'graph.instagram.com',
