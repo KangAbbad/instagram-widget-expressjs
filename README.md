@@ -136,13 +136,31 @@ Long-lived access tokens are valid for 60 days.
 
 ## Available API
 
-### **/me**
+### **[GET] get-auth-code**
+
+```html
+http://localhost:4000/get-auth-code
+```
+
+### **[POST] get-short-lived-access-token**
+
+```html
+http://localhost:4000/get-short-lived-access-token
+```
+
+### **[GET] get-long-lived-access-token**
+
+```html
+http://localhost:4000/get-long-lived-access-token
+```
+
+### **[GET] me**
 
 ```html
 http://localhost:4000/me
 ```
 
-### **/ig-posts**
+### **[GET] ig-posts**
 
 ```html
 http://localhost:4000/ig-posts
